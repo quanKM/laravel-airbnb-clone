@@ -23,6 +23,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <img src="{{ Auth::user()->gravatar(30) }}" class="rounded-circle mr-2">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
