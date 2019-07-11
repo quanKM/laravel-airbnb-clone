@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -21,11 +22,23 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $data = $request->validate([
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user())],
             'password' => ['nullable', 'string', 'min:6', 'confirmed'],
-        ]);
+        ];
+
+        $validator = Validator::make(
+            $request->all(),
+            $rules
+        );
+
+        if ($validator->fails()) {
+            toastr()->error('There are error(s) in your submission');
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $data = $validator->valid();
 
         // Remove password if not set
         if (is_null(request()->password)) {
@@ -37,6 +50,8 @@ class UsersController extends Controller
         auth()->user()->fill($data);
         auth()->user()->save();
 
-        return redirect(route('user.edit'));
+        toastr()->success('Updated successfully');
+
+        return redirect()->route('user.edit');
     }
 }
