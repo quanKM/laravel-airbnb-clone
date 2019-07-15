@@ -75,9 +75,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    
+
     public function registered()
     {
-        toastr()->success('Registered successfully!');
+        toastr()->success('Please complete your registration by verifying your account. We have submitted a confirmation to your email!');
     }
 }
