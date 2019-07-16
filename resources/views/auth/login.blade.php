@@ -40,6 +40,10 @@
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                 </div>
             </form>
+
+            <hr>
+
+            <a href="{{ route('redirect', 'facebook') }}" class="btn btn-primary btn-block">Sign in with Facebook</a>
         </div>
     </div>
 </div>
