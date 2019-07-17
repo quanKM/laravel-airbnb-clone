@@ -11,3 +11,5 @@ Route::group(['middleware' => 'verified', 'as' => 'user.'], function() {
 
 Route::get('/auth/redirect/{provider}', 'SocialAuthController@redirect')->name('redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback')->name('callback');
+
+Route::resource('users', 'UsersController')->only(['show']);

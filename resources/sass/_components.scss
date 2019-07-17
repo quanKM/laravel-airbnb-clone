@@ -28,7 +28,37 @@
     }
   }
 
-  &:hover, &:focus {
+  &.btn-default {
+    background-color: #ffffff ;
+    border-color: $outline-defaul-color;
+    border-radius: 0;
+    color: $text-default;
+
+    &:hover {
+      color: lighten($text-default, 20%);
+    }
+  }
+
+  &:hover {
     color: #ffffff;
+  }
+}
+
+// Cards
+.card.profile {
+  .card-header {
+    background-color: $link-color;
+    color: #ffffff;
+  }
+}
+
+// Lists
+ul.sidebar {
+  a {
+    color: $text-default;
+
+    &:hover {
+      color: $link-color;
+    }
   }
 }

@@ -9,12 +9,14 @@ $text-default: #565a5c;
 $brand-color: #ff5a5f;
 $fb-color:  #3b5998;
 $link-color: #00a699;
+$outline-defaul-color: #c4c4c4;
 
 // Initial
 a {
   color: $link-color;
 
   &:hover {
-      text-decoration: none;
+    color: $text-default;
+    text-decoration: none;
   }
 }

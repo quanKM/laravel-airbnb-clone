@@ -11105,6 +11105,7 @@ a {
 }
 
 a:hover {
+  color: #565a5c;
   text-decoration: none;
 }
 
@@ -11149,8 +11150,31 @@ body {
   background-color: #2d4373;
 }
 
-.btn:hover,
-.btn:focus {
+.btn.btn-default {
+  background-color: #ffffff;
+  border-color: #c4c4c4;
+  border-radius: 0;
+  color: #565a5c;
+}
+
+.btn.btn-default:hover {
+  color: #888d90;
+}
+
+.btn:hover {
   color: #ffffff;
+}
+
+.card.profile .card-header {
+  background-color: #00a699;
+  color: #ffffff;
+}
+
+ul.sidebar a {
+  color: #565a5c;
+}
+
+ul.sidebar a:hover {
+  color: #00a699;
 }
 

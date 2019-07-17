@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\User;
 
 class UsersController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
     }
 
     public function edit()
