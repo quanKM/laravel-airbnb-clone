@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <h2 class="text-center">Login</h2>
+            <h2 class="text-center mt-5 mb-4">Login</h2>
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -37,13 +37,13 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    <button type="submit" class="btn btn-normal btn-block">Login</button>
                 </div>
             </form>
 
-            <hr>
+            <hr class="my-4">
 
-            <a href="{{ route('redirect', 'facebook') }}" class="btn btn-primary btn-block">Sign in with Facebook</a>
+            <a href="{{ route('redirect', 'facebook') }}" class="btn btn-facebook btn-block">Sign in with Facebook</a>
         </div>
     </div>
 </div>

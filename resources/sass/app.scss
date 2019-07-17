@@ -1,8 +1,10 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Variables
+@import 'init';
+@import 'layout.scss';
+@import 'components.scss';

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <h2 class="text-center">Profile</h2>
+            <h2 class="text-center mt-5 mb-4">Profile</h2>
 
             <form method="POST" action="{{ route('user.update') }}">
                 @csrf
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group mb-0">
-                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    <button type="submit" class="btn btn-normal btn-block">Save</button>
                 </div>
             </form>
         </div>
