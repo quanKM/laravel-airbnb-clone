@@ -15,8 +15,9 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'phone_number', 'description'
+
+    protected $guarded = [
+        'email_verified_at', 'remember_token' 
     ];
 
     /**
@@ -36,6 +37,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 
     public function gravatar($size = 150)
     {

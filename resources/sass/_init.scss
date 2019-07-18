@@ -1,3 +1,5 @@
+
+@import '~@fortawesome/fontawesome-free/scss/regular';
 // Body
 $body-bg:  #f8f8f8;
 
@@ -18,5 +20,38 @@ a {
   &:hover {
     color: $text-default;
     text-decoration: none;
+  }
+}
+
+.container-small {
+  width: 80%;
+}
+
+input[type=checkbox]:not(.form-check-input) {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid #ddd;
+  display: inline-block;
+  height: 20px;
+  margin-right: 5px;
+  width: 20px;
+  vertical-align: middle;
+  outline: none;
+  position: relative;
+
+  &:checked {
+    &:before {
+      color: $link-color;
+      content: "\f00c";
+      font-family: "Font Awesome 5 Free";
+      font-size: 0.9em;
+      font-weight: 900;
+      left: 0;
+      right: 0;
+      position: absolute;
+      text-align: center;
+      line-height: 20px;
+    }
   }
 }

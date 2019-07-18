@@ -16,7 +16,7 @@
             <div class="card profile">
                 <div class="card-header text-center">Your Profile</div>
                 <div class="card-body">
-                    <div class="container" style="width: 80%;">
+                    <div class="container container-small">
                         <form method="POST" action="{{ route('user.update') }}">
                             @csrf
                             @method('PATCH')

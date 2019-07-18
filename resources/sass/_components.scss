@@ -39,6 +39,10 @@
     }
   }
 
+  &.btn-form {
+    background-color: $link-color;
+  }
+
   &:hover {
     color: #ffffff;
   }
@@ -54,11 +58,15 @@
 
 // Lists
 ul.sidebar {
-  a {
-    color: $text-default;
+  li {
+    padding: 10px 0;
 
-    &:hover {
-      color: $link-color;
+    a {
+      color: $text-default;
+  
+      &:hover {
+        color: $link-color;
+      }
     }
   }
 }

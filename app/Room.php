@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SocialAccount extends Model
+class Room extends Model
 {
     protected $guarded = [];
 
