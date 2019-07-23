@@ -28,4 +28,5 @@ Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function() {
     Route::get('/{room}/photos', 'RoomController@photos')->name('photos');
     Route::get('/{room}/amenities', 'RoomController@amenities')->name('amenities');
     Route::get('/{room}/location', 'RoomController@location')->name('location');
+    Route::resource('{room}/photos', 'PhotoController')->only(['store', 'destroy']);
 });
