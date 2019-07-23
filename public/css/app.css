@@ -16601,13 +16601,6 @@ body {
   background-color: #00a699;
 }
 
-.btn.btn-sm,
-.btn-group-sm > .btn {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
 .btn:hover {
   color: #ffffff;
 }
@@ -16628,6 +16621,23 @@ body {
 .card.profile > .card-header {
   background-color: #00a699;
   color: #ffffff;
+}
+
+.photos .card .delete-btn {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
+}
+
+.photos .card .delete-btn i.fa {
+  text-shadow: 0px 1px 7px #000;
+  font-size: 1.3em;
+}
+
+.photos .card:hover .delete-btn {
+  display: block;
 }
 
 ul.sidebar li {

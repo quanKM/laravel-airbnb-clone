@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Room;
 use App\Photo;
+use Illuminate\Support\Facades\Storage;
+use Response;
 
 class PhotoController extends Controller
 {
@@ -31,6 +33,11 @@ class PhotoController extends Controller
 
     public function destroy(Room $room, Photo $photo)
     {
-        //
+        if ($photo->delete()) {
+            Storage::deleteDirectory("public/photos/{$photo->id}");
+            return Response::json(['message' => 'Successfully deleted photo']);
+        } else {
+            return Response::json(['message' => 'Something went wrong, try again.']);
+        }
     }
 }

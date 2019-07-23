@@ -36,7 +36,7 @@
                                 <div class="photos mt-4">
                                     <div class="row">
                                         @foreach ($room->photos as $photo)
-                                            <div class="col-md-4 mb-4">
+                                            <div class="col-md-4 mb-4" id="photo-{{ $photo->id }}">
                                                 <div class="card">
                                                     <div class="card-body p-0">
                                                         <img
@@ -44,6 +44,13 @@
                                                             alt="{{ $room->listing_name }}"
                                                             class="card-img-top">
                                                     </div>
+
+                                                    <a href="javascript:void(0)"
+                                                        class="delete-btn"
+                                                        data-id="{{ $photo->id }}"
+                                                        data-route="{{ route('rooms.photos.destroy', [$room, $photo]) }}">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -56,5 +63,33 @@
             </div>
         </div>
     </div>
+@endsection
 
+@section('scripts')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('body').on('click', '.photos .delete-btn', function() {
+            var photo_id = $(this).data('id');
+            var route = $(this).data('route');
+
+            if (confirm("Are you sure you want to delete?")) {
+                $.ajax({
+                    type: "DELETE",
+                    url: route,
+                    success: function(data) {
+                        $(`#photo-${photo_id}`).remove();
+                        toastr.info(data.message);
+                    },
+                    failed: function(data) {
+                        toastr.failed(data.message);
+                    }
+                });
+            }
+        });
+    </script>
 @endsection
