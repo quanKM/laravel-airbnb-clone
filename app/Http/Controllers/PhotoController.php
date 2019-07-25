@@ -34,7 +34,6 @@ class PhotoController extends Controller
     public function destroy(Room $room, Photo $photo)
     {
         if ($photo->delete()) {
-            Storage::deleteDirectory("public/photos/{$photo->id}");
             return Response::json(['message' => 'Successfully deleted photo']);
         } else {
             return Response::json(['message' => 'Something went wrong, try again.']);

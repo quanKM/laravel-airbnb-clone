@@ -40,7 +40,7 @@
                                                 <div class="card">
                                                     <div class="card-body p-0">
                                                         <img
-                                                            src="{{ asset($photo->path("medium")) }}"
+                                                            src="{{ Storage::disk('s3')->url($photo->path("medium")) }}"
                                                             alt="{{ $room->listing_name }}"
                                                             class="card-img-top">
                                                     </div>
