@@ -21,6 +21,9 @@
                         </li>
                     @endif
                 @else
+                    <li class="nav-item">
+                        <button class="btn btn-form btn-small mt-1"><a href="{{ route('rooms.create') }}" style="color: white; text-decoration: none">Become a host</a></button>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             @if (Auth::user()->socialAccount)
@@ -31,6 +34,8 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('rooms.create') }}">List Your Spaces</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('user.edit') }}">Edit Profile</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

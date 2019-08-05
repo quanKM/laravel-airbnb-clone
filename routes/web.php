@@ -22,11 +22,12 @@ Route::group(['middleware' => 'verified', 'as' => 'user.'], function() {
 Route::resource('rooms', 'RoomController')->except(['edit']);
 
 Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function() {
+    Route::resource('{room}/photos', 'PhotoController')->only(['store', 'destroy']);
     Route::get('/{room}/listing', 'RoomController@listing')->name('listing');
     Route::get('/{room}/pricing', 'RoomController@pricing')->name('pricing');
     Route::get('/{room}/description', 'RoomController@description')->name('description');
     Route::get('/{room}/photos', 'RoomController@photos')->name('photos');
     Route::get('/{room}/amenities', 'RoomController@amenities')->name('amenities');
     Route::get('/{room}/location', 'RoomController@location')->name('location');
-    Route::resource('{room}/photos', 'PhotoController')->only(['store', 'destroy']);
+    Route::patch('/{room}/publish', 'RoomController@publish')->name('publish');
 });

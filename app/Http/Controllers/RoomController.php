@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Room;
 
 class RoomController extends Controller
@@ -10,6 +11,17 @@ class RoomController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
+
+        // Checks if action is for create or listing, to pass necessary values for select dropdown options
+        if (!app()->runningInConsole()) {
+            if (Str::contains(request()->route()->getActionName(), ['create', 'listing'])) {
+                $home_types = ['Apartment', 'House', 'Bed & Breakfast'];
+                $room_types = ['Entire', 'Private', 'Shared'];
+                $count_options = [1 => 1, 2 => 2, 3 => 3, 4 => '4+'];
+
+                view()->share(compact(['home_types', 'room_types', 'count_options']));
+            }
+        }
     }
 
     public function index()
@@ -75,6 +87,15 @@ class RoomController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function publish(Room $room)
+    {
+        if ($room->isReady()) {
+            $room->update(['active' => true]);
+        }
+
+        return redirect()->back();
     }
 
     public function listing(Room $room)

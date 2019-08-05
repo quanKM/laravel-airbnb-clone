@@ -10,11 +10,13 @@
     border: 1px solid $brand-color;
     background-color: $brand-color;
 
+    &:not(.disabled) {
       &:hover {
-      outline: none;
-      border-color: darken($brand-color, 10%);
-      background-color: darken($brand-color, 10%);
-    }
+        outline: none;
+        border-color: darken($brand-color, 10%);
+        background-color: darken($brand-color, 10%);
+      }
+      }
   }
 
   &.btn-facebook {
@@ -58,6 +60,11 @@
       height: 100%;
       opacity: 0;
     }
+  }
+
+  &.btn-small {
+    padding: 5px 15px;
+    margin-top: 15px;
   }
 }
 
@@ -103,6 +110,10 @@ ul.sidebar {
       &:hover {
         color: $link-color;
       }
+    }
+
+    .fa {
+      color: $link-color;
     }
   }
 }

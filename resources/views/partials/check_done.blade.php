@@ -1,0 +1,1 @@
+<span class="float-right"><i class="fa fa-check"></i></span>

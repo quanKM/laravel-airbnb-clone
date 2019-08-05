@@ -16569,7 +16569,7 @@ body {
   background-color: #ff5a5f;
 }
 
-.btn.btn-normal:hover {
+.btn.btn-normal:not(.disabled):hover {
   outline: none;
   border-color: #ff272e;
   background-color: #ff272e;
@@ -16618,6 +16618,11 @@ body {
   opacity: 0;
 }
 
+.btn.btn-small {
+  padding: 5px 15px;
+  margin-top: 15px;
+}
+
 .card.profile > .card-header {
   background-color: #00a699;
   color: #ffffff;
@@ -16649,6 +16654,10 @@ ul.sidebar li a {
 }
 
 ul.sidebar li a:hover {
+  color: #00a699;
+}
+
+ul.sidebar li .fa {
   color: #00a699;
 }
 

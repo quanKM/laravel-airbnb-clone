@@ -83,6 +83,11 @@
                     url: route,
                     success: function(data) {
                         $(`#photo-${photo_id}`).remove();
+
+                        if (data.empty_photos) {
+                            window.location.reload();
+                        }
+
                         toastr.info(data.message);
                     },
                     failed: function(data) {
