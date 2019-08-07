@@ -59,9 +59,9 @@ class RoomController extends Controller
         return redirect()->route('rooms.listing', $room);
     }
 
-    public function show($id)
+    public function show(Room $room)
     {
-        //
+        return view('rooms.show', compact('room'));
     }
 
     public function update(Request $request, Room $room)

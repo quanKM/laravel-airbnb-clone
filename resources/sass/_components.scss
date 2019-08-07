@@ -121,3 +121,14 @@ ul.sidebar {
     }
   }
 }
+
+// Text
+.text-secondary {
+  color: $link-color !important;
+}
+
+.text-line-through {
+  text-decoration: line-through;
+  opacity: 0.5;
+  font-size: 14px;
+}
