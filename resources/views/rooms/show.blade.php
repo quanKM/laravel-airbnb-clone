@@ -130,7 +130,14 @@
                     </div>
                 @endif
             </div>
+
             <hr/>
+
+            {{-- Google Map --}}
+            <div class="row">
+                <div id="map" class="w-100" style="height: 400px">
+                </div>
+            </div>
         </div>
 
         {{-- RIGHT PANEL --}}
@@ -139,4 +146,31 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.api_key') }}"></script>
+<script>
+    function initialize() {
+        var location = {lat: {{ $room->latitude }}, lng: {{ $room->longitude }}};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: location,
+            zoom: 14
+        });
+
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: "<div id='content'><img src='{{ $room->coverPhoto('medium') }}'></div>"
+        });
+
+        infoWindow.open(map, marker);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>    
 @endsection

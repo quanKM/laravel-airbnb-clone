@@ -24,7 +24,11 @@ return [
         'client_id' => env('FACEBOOK_APP_ID'),
         'client_secret' => env('FACEBOOK_APP_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT'),
-    ], 
+    ],
+
+    'googlemaps' => [
+        'api_key' => env('GOOGLE_MAP_API_KEY')
+    ],
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
