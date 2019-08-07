@@ -34,6 +34,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('rooms.index') }}">Manage Listings</a>
                             <a class="dropdown-item" href="{{ route('rooms.create') }}">List Your Spaces</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('user.edit') }}">Edit Profile</a>

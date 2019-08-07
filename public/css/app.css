@@ -16653,6 +16653,10 @@ ul.sidebar li a {
   color: #565a5c;
 }
 
+ul.sidebar li a.active {
+  color: black;
+}
+
 ul.sidebar li a:hover {
   color: #00a699;
 }

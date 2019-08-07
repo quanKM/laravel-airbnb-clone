@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Room extends Model
 {
@@ -26,5 +27,10 @@ class Room extends Model
             $this->photos()->exists() &&
             $this->address
         );
+    }
+
+    public function coverPhoto($dimension)
+    {
+        return $this->photos->count() > 0 ? Storage::disk('s3')->url($this->photos[0]->path($dimension)) : "/storage/photos/blank.jpg";
     }
 }
