@@ -138,6 +138,27 @@
                 <div id="map" class="w-100" style="height: 400px">
                 </div>
             </div>
+
+            <hr/>
+
+            {{-- Nearby Rooms --}}
+            <div>
+                <h3>Near by</h3>
+                <div class="row">
+                    @foreach ($room->nearbys(10) as $nearbyRoom)
+                        <div class="col-md-4">
+                            <div class="card">
+                                <img class="card-image-top w-100" src="{{ $nearbyRoom->coverPhoto('medium') }}">
+                                <div class="card-body">
+                                    <a href="{{ route('rooms.show', $nearbyRoom) }}">{{ $nearbyRoom->listing_name }}</a>
+                                    <br/>
+                                    ({{ round($nearbyRoom->distance, 2) }} kms away)
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
 
         {{-- RIGHT PANEL --}}
