@@ -164,6 +164,27 @@
         {{-- RIGHT PANEL --}}
         <div class="col-md-4">
             {{-- RESERVATION FORM --}}
+            <form action="{{ route('rooms.reservations.store', $room) }}" method="POST">
+                @csrf
+
+                <div class="form-group">
+                    <label for="start_date"></label>
+                    <input
+                        class="form-control" type="text"
+                        name="start_date" id="start_date">
+
+                </div>
+                <div class="form-group">
+                    <label for="end_date"></label>
+                    <input
+                        class="form-control" type="text"
+                        name="end_date" id="end_date">
+                </div>
+                <br/>
+                <div class="form-group">
+                    <button class="btn btn-normal btn-block" type="submit">Book Now</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
