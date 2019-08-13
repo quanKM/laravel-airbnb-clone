@@ -31,4 +31,5 @@ Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function() {
     Route::get('/{room}/location', 'RoomController@location')->name('location');
     Route::patch('/{room}/publish', 'RoomController@publish')->name('publish');
     Route::resource('{room}/reservations', 'ReservationController')->only('store');
+    Route::get('/{room}/preload', 'RoomController@preload')->name('preload');
 });

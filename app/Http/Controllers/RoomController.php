@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Spatie\Geocoder\Facades\Geocoder;
+use Carbon\Carbon;
 use App\Room;
 
 class RoomController extends Controller
@@ -140,5 +141,15 @@ class RoomController extends Controller
     public function location(Room $room)
     {
         return view('rooms.location', compact('room'));
+    }
+
+    public function preload(Room $room)
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        $reservations = $room->reservations()->where('start_date', '>=', $today)
+                                             ->orWhere('end_date', '>=', $today)
+                                             ->get();
+
+        return response()->json($reservations);
     }
 }

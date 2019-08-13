@@ -18216,3 +18216,21 @@ ul.sidebar li .fa {
   display: block;
 }
 
+.reservation-form .card-header i.fa-bolt {
+  color: #ffb400;
+}
+
+.reservation-form .card-body table tr td {
+  width: 100%;
+  border: none;
+  padding: 10px;
+}
+
+.reservation-form .card-body table tr td:not(.total) {
+  border-bottom: 1px solid #DCE0E0;
+}
+
+.reservation-form .card-body table tr td:last-child {
+  text-align: right;
+}
+

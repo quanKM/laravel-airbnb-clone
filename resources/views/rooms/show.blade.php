@@ -162,29 +162,61 @@
         </div>
 
         {{-- RIGHT PANEL --}}
-        <div class="col-md-4">
+        <div class="col-md-4 reservation-form">
             {{-- RESERVATION FORM --}}
-            <form action="{{ route('rooms.reservations.store', $room) }}" method="POST" autocomplete="off">
-                @csrf
+            <div class="card profile">
+                <div class="card-header">
+                    <span><i class="fa fa-bolt"></i> ${{ $room->price }}</span>
+                    <span class="float-right">Per Night</span>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('rooms.reservations.store', $room) }}" method="POST" autocomplete="off">
+                        @csrf
+        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start_date">Check In</label>
+                                <input
+                                    class="form-control datepicker" type="text"
+                                    name="start_date" id="start_date"
+                                    placeholder="Start Date">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end_date">Check Out</label>
+                                <input
+                                    class="form-control datepicker" type="text"
+                                    name="end_date" id="end_date"
+                                    placeholder="End Date" disabled>
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <label for="start_date"></label>
-                    <input
-                        class="form-control datepicker" type="text"
-                        name="start_date" id="start_date">
+                        {{-- Preview --}}
+                        <div id="preview" class="d-none">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Price</td>
+                                        <td>${{ $room->price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Night(s)</td>
+                                        <td>x <span id="reservation_nights"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="total">Total</td>
+                                        <td>$<span id="reservation_total"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
+                        <br/>
+                        <div class="form-group">
+                            <button class="btn btn-normal btn-block" type="submit">Book Now</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="end_date"></label>
-                    <input
-                        class="form-control datepicker" type="text"
-                        name="end_date" id="end_date">
-                </div>
-                <br/>
-                <div class="form-group">
-                    <button class="btn btn-normal btn-block" type="submit">Book Now</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -215,4 +247,47 @@
 
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>    
+<script>
+    function checkDate(date) {
+        ymd = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        return [$.inArray(ymd, unavailableDates) == -1];
+    }
+
+    $(function() {
+        unavailableDates = [];
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('rooms.preload', $room) }}",
+            success: function(data) {
+                $.each(data, function(key, value){
+                    for(var date = new Date(value.start_date); date <= new Date(value.end_date); date.setDate(date.getDate() + 1)) {
+                        unavailableDates.push($.datepicker.formatDate('yy-m-d', date));
+                    }
+                });
+
+                $('#start_date').datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    minDate: 0,
+                    maxDate: '3m',
+                    beforeShowDay: checkDate,
+                    onSelect: function(selected) {
+                        $('#end_date').datepicker('option', 'minDate', selected);
+                        $('#end_date').attr('disabled', false);
+                    }
+                });
+
+                $('#end_date').datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    minDate: 0,
+                    maxDate: '3m',
+                    beforeShowDay: checkDate,
+                    onSelect: function(selected) {
+                        $('#start_date').datepicker('option', 'maxDate', selected);
+                    }
+                });
+            }
+        });
+    })
+</script>
 @endsection
