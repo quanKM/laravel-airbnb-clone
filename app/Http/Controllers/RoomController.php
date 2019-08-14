@@ -152,4 +152,23 @@ class RoomController extends Controller
 
         return response()->json($reservations);
     }
+
+    public function preview(Room $room, Request $request)
+    {
+        $start_date = Carbon::createFromFormat('Y-m-d', $request->start_date);
+        $end_date = Carbon::createFromFormat('Y-m-d', $request->end_date);
+
+        $output = array(
+            'conflict' => $this->isConflict($room, $start_date, $end_date)
+        );
+
+        return response()->json($output);
+    }
+
+    private function isConflict(Room $room, $start_date, $end_date)
+    {
+        $check = $room->reservations->where('start_date', '>', $start_date)
+                                    ->where('end_date', '<', $end_date);
+        return $check->count() > 0 ? true :  false;
+    }
 }
