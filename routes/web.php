@@ -34,3 +34,5 @@ Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function() {
     Route::get('/{room}/preload', 'RoomController@preload')->name('preload');
     Route::get('/{room}/preview', 'RoomController@preview')->name('preview');
 });
+
+Route::get('/your-trips', 'ReservationController@yourTrips')->name('your_trips');

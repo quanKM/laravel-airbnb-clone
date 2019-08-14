@@ -34,4 +34,11 @@ class ReservationController extends Controller
 
         return redirect()->back();
     }
+
+    public function yourTrips()
+    {
+        $trips = Auth::user()->reservations->sortBy('start_date');
+
+        return view('reservations.your_trips', compact('trips'));
+    }
 }

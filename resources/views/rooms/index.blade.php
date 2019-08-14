@@ -4,14 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <ul class="sidebar list-unstyled">
-                <li>
-                    <a class="active" href="{{ route('rooms.index') }}">Your Listings</a>
-                </li>
-                <li>
-                    <a href="">Your Reservations</a>
-                </li>
-            </ul>
+            @include('partials.sidebar', ['route' => Route::currentRouteName()])
         </div>
         <div class="col-md-9">
             <div class="card profile">
