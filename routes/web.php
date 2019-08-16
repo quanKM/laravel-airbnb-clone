@@ -36,3 +36,4 @@ Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function() {
 });
 
 Route::get('/your-trips', 'ReservationController@yourTrips')->name('your_trips');
+Route::get('/your-reservations', 'ReservationController@yourReservations')->name('your_reservations');

@@ -41,4 +41,11 @@ class ReservationController extends Controller
 
         return view('reservations.your_trips', compact('trips'));
     }
+
+    public function yourReservations()
+    {
+        $rooms = Auth::user()->rooms;
+
+        return view('reservations.your_reservations', compact('rooms'));
+    }
 }
