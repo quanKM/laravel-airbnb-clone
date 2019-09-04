@@ -48,7 +48,25 @@
                     </div>
                 @endforeach
             </div>
+
+            <br><br>
+
+            <h4>Reviews From Guests ({{ $guestReviews->count() }})</h4>
+            <div>
+                @include('reviews.partials.guest_reviews')
+            </div>
+
+            <br><br>
+
+            <h4>Reviews From Hosts ({{ $hostReviews->count() }})</h4>
+            <div>
+                @include('reviews.partials.host_reviews')
+            </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    
 @endsection

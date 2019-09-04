@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\GuestReview;
+use App\HostReview;
 
 class UsersController extends Controller
 {
@@ -17,7 +19,15 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $guestReviews = GuestReview::where('host_id', $user->id)
+                                    ->where('type', 'GuestReview')
+                                    ->get();
+
+        $hostReviews = HostReview::where('guest_id', $user->id)
+                                  ->where('type', 'HostReview')
+                                  ->get();
+
+        return view('users.show', compact('user', 'hostReviews', 'guestReviews'));
     }
 
     public function edit()

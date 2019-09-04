@@ -1,9 +1,9 @@
-@if ($room->guestReviews->count() == 0)
+@if ($guestReviews->count() == 0)
     <div class="text-center">
         <h4>There are no reviews.</h4>
     </div>
 @else
-    @foreach ($room->guestReviews as $guestReview)
+    @foreach ($guestReviews as $guestReview)
     <div class="reviews">
         <hr/>
         <div class="row">
@@ -35,3 +35,17 @@
     </div>
     @endforeach
 @endif
+
+@section('scripts')
+    @parent
+
+    @foreach ($guestReviews as $guestReview)
+        <script>
+            $('#star_{{ $guestReview->id }}').raty({
+                path: '/images',
+                readOnly: true,
+                score: {{ $guestReview->star }}
+            });
+        </script>
+    @endforeach
+@endsection

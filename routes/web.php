@@ -43,4 +43,5 @@ Route::group(['prefix' => 'reservations/{reservation}'], function() {
     Route::resource('guest-reviews', 'GuestReviewController')->only('store');
 });
 
-Route::delete('guest-reviews/{review}', 'GuestReviewController@destroy')->name('guest-reviews.destroy');;
+Route::delete('guest-reviews/{review}', 'GuestReviewController@destroy')->name('guest-reviews.destroy');
+Route::delete('host-reviews/{review}', 'HostReviewController@destroy')->name('host-reviews.destroy');

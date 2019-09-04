@@ -140,7 +140,7 @@
                         <span id="average_rating"></span>
                     </h3>
                     <div class="container">
-                        @include('reviews.partials.guest_reviews')
+                        @include('reviews.partials.guest_reviews', ['guestReviews' => $room->guestReviews])
                     </div>
                 </div>
             </div>
@@ -350,13 +350,4 @@
         score: {{ $room->averageRating() }}
     });
 </script>
-@foreach ($room->guestReviews as $guestReview)
-<script>
-    $('#star_{{ $guestReview->id }}').raty({
-        path: '/images',
-        readOnly: true,
-        score: {{ $guestReview->star }}
-    });
-</script>
-@endforeach
 @endsection
