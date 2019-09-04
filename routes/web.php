@@ -37,3 +37,8 @@ Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function() {
 
 Route::get('/your-trips', 'ReservationController@yourTrips')->name('your_trips');
 Route::get('/your-reservations', 'ReservationController@yourReservations')->name('your_reservations');
+
+Route::group(['prefix' => 'reservations/{reservation}'], function() {
+    Route::resource('host-reviews', 'HostReviewController')->only('store');
+    Route::resource('guest-reviews', 'GuestReviewController')->only('store');
+});

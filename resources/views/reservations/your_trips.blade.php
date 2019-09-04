@@ -22,7 +22,7 @@
                                     <img src="{{ $trip->room->coverPhoto('thumb') }}">
                                 </a>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-5">
                                 <a href="{{ route('rooms.show', $trip->room) }}">{{ $trip->room->listing_name }}</a>
                                 <br><br>
                                 <span>
@@ -35,6 +35,42 @@
                                         {{ $trip->room->user->name }}
                                     </a>
                                 </span>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-normal" data-toggle="modal" data-target="#myModal_{{ $trip->id }}">
+                                        Review Host
+                                </button>
+
+                                    <!-- The Modal -->
+                                <div class="modal" id="myModal_{{ $trip->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                                <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-left">Review Host</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+
+                                                <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <form action="{{ route('guest-reviews.store', $trip) }}" method="post">
+                                                    @csrf
+                                                    <div class="form-group text-center">
+                                                        <input type="text" class="form-control" name="star">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea name="comment" id="comment" rows="3" class="form-control"></textarea>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <button class="btn btn-normal" type="submit">Add Review</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr/>
