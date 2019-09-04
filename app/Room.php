@@ -56,4 +56,9 @@ class Room extends Model
                     ->where('id', '!=', $this->id)
                     ->get();
     }
+
+    public function averageRating()
+    {
+        return $this->guestReviews()->count() == 0 ? 0 : round($this->guestReviews()->avg('star'));
+    }
 }

@@ -29,6 +29,7 @@
     @toastr_js
     @toastr_render
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.js"></script>
     @yield('scripts')
 </body>
 </html>

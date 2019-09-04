@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\GuestReview;
 use App\Reservation;
+use App\Review;
 
 class GuestReviewController extends Controller
 {
@@ -38,6 +39,15 @@ class GuestReviewController extends Controller
             // Already reviewed
             toastr()->info('You already reviewed this reservation!');
         }
+
+        return redirect()->back();
+    }
+
+    public function destroy(Review $review)
+    {
+        $review->delete();
+
+        toastr()->success('Review deleted successfully!');
 
         return redirect()->back();
     }

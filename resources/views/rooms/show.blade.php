@@ -133,6 +133,22 @@
 
             <hr/>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        {{ $room->guestReviews->count() }} {{ str_plural("Review", $room->guestReviews->count()) }}
+                        <span id="average_rating"></span>
+                    </h3>
+                    <div class="container">
+                        @include('reviews.partials.guest_reviews')
+                    </div>
+                </div>
+            </div>
+            
+            <br/>
+            
+            <hr/>
+
             {{-- Google Map --}}
             <div class="row">
                 <div id="map" class="w-100" style="height: 400px">
@@ -327,4 +343,20 @@
         });
     })
 </script>
+<script>
+    $('#average_rating').raty({
+        path: '/images',
+        readOnly: true,
+        score: {{ $room->averageRating() }}
+    });
+</script>
+@foreach ($room->guestReviews as $guestReview)
+<script>
+    $('#star_{{ $guestReview->id }}').raty({
+        path: '/images',
+        readOnly: true,
+        score: {{ $guestReview->star }}
+    });
+</script>
+@endforeach
 @endsection

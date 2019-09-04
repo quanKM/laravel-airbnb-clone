@@ -59,7 +59,7 @@
                                                     <form action="{{ route('host-reviews.store', $reservation) }}" method="post">
                                                         @csrf
                                                         <div class="form-group text-center">
-                                                            <input type="text" class="form-control" name="star">
+                                                            <div class="star"></div>
                                                         </div>
                                                         <div class="form-group">
                                                             <textarea name="comment" id="comment" rows="3" class="form-control"></textarea>
@@ -83,4 +83,14 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $('.star').raty({
+        path: '/images',
+        scoreName: 'star',
+        score: 1
+    });
+</script>
 @endsection
