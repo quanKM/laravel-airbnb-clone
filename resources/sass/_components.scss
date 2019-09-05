@@ -123,6 +123,10 @@ ul.sidebar {
 }
 
 // Text
+.text-primary {
+  color: $brand-color !important;
+}
+
 .text-secondary {
   color: $link-color !important;
 }

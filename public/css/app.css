@@ -18184,6 +18184,10 @@ ul.sidebar li .fa {
   color: #00a699;
 }
 
+.text-primary {
+  color: #ff5a5f !important;
+}
+
 .text-secondary {
   color: #00a699 !important;
 }

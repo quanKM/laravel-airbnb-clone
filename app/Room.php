@@ -61,4 +61,9 @@ class Room extends Model
     {
         return $this->guestReviews()->count() == 0 ? 0 : round($this->guestReviews()->avg('star'));
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
 }

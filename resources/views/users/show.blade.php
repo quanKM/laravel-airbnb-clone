@@ -35,18 +35,7 @@
             <br/>
 
             <div class="row">
-                @foreach ($user->rooms as $room)
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header p-0">
-                                <img class="w-100" src="{{ $room->coverPhoto('medium') }}" alt="">
-                            </div>
-                            <div class="card-body">
-                                <a href="{{ route('rooms.show', $room) }}">{{ $room->listing_name }}</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                @include('rooms.partials.room_list', ['rooms' => $user->rooms])
             </div>
 
             <br><br>
