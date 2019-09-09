@@ -11,7 +11,7 @@
     <form action="" autocomplete="off">
         <div class="row">
             <div class="col-md-6 input-group-lg">
-                <input class="form-control" name="search" type="text" placeholder="Where are you going?">
+                <input class="form-control" name="address" type="text" placeholder="Where are you going?">
             </div>
             <div class="col-md-3 input-group-lg">
                 <input class="form-control text-center" id="start_date" name="start_date" type="text" placeholder="Start Date">
@@ -71,7 +71,7 @@
 @section('scripts')
 <script>
     $('#start_date').datepicker({
-        dateFormat: 'dd-mm-yy',
+        dateFormat: 'yy-mm-dd',
         minDate: 0,
         maxDate: '3m',
         onSelect: function(selected) {
@@ -79,7 +79,7 @@
         }
     });
     $('#end_date').datepicker({
-        dateFormat: 'dd-mm-yy',
+        dateFormat: 'yy-mm-dd',
         minDate: 0,
         maxDate: '3m',
         onSelect: function(selected) {
