@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Spatie\Geocoder\Facades\Geocoder;
 use App\Room;
 
 class RoomController extends Controller
@@ -76,6 +77,15 @@ class RoomController extends Controller
         ]);
 
         $room->fill($request->all());
+
+        if ($request->has('address')) {
+            $coordinates =  Geocoder::getCoordinatesForAddress($request->address);
+
+            $room->fill([
+                'latitude' => $coordinates['lat'],
+                'longitude' => $coordinates['lng']
+            ]);
+        }
 
         if ($room->save()) {
             toastr()->success('Saved your room successfully');

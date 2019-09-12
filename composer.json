@@ -16,6 +16,7 @@
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
+        "spatie/geocoder": "^3.6",
         "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
