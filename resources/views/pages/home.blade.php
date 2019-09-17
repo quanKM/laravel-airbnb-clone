@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <form action="" autocomplete="off">
+    <form action="{{ route('search') }}" autocomplete="off">
         <div class="row">
             <div class="col-md-6 input-group-lg">
                 <input class="form-control" name="address" type="text" placeholder="Where are you going?">
@@ -46,22 +46,22 @@
 
     <div class="row">
         <div class="col-md-3 col-sm-12">
-            <a href="">
+            <a href="{{ route('search', ['address' => 'Los Angeles']) }}">
                 <img class="w-100" src="/images/LA.jpg" alt="">
             </a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="">
+            <a href="{{ route('search', ['address' => 'London']) }}">
                 <img class="w-100" src="/images/LD.jpg" alt="">
             </a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="">
+            <a href="{{ route('search', ['address' => 'Paris']) }}">
                 <img class="w-100" src="/images/PR.jpg" alt="">
             </a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="">
+            <a href="{{ route('search', ['address' => 'Miami']) }}">
                 <img class="w-100" src="/images/MI.jpg" alt="">
             </a>
         </div>

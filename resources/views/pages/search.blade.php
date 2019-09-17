@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-            <form action="" autocomplete="off">
+            <form action="{{ route('search') }}" autocomplete="off">
                 <div class="mb-4 input-group-lg">
                     <input type="text" class="form-control" name="address" placeholder="Anywhere" value="{{ old('address') }}">
                 </div>
@@ -22,25 +22,25 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Min Price:</label>
-                                <input type="text" class="form-control" name="min_price">
+                                <input type="text" class="form-control" name="min_price" value="{{ old('min_price') }}">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Max Price:</label>
-                                <input type="text" class="form-control" name="max_price">
+                                <input type="text" class="form-control" name="max_price" value="{{ old('max_price') }}">
                             </div>
                         </div>
                     </div>
-
+    
                     <hr/>
 
                     <div class="row">
                         <div class="col-md-6 input-group-lg">
-                            <input type="text" class="form-control text-center" id="start_date" name="start_date" placeholder="Start Date">
+                            <input type="text" class="form-control text-center" id="start_date" name="start_date" placeholder="Start Date" value={{ old('start_date') }}>
                         </div>
                         <div class="col-md-6 input-group-lg">
-                            <input type="text" class="form-control text-center" id="end_date" name="end_date" placeholder="End Date">
+                            <input type="text" class="form-control text-center" id="end_date" name="end_date" placeholder="End Date" value="{{ old('end_date') }}">
                         </div>
                     </div>
 
@@ -52,8 +52,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     @include('partials.form.checkbox', [
-                                        'name' => $room_name,
-                                        'value' => old($room_name)
+                                        'name' => "room_type[{$room_name}]",
+                                        'value' => old("room_type.$room_name")
                                     ])
                                     <label class="align-text-top" for="{{ $room_name }}">{{ $room_value }}</label>
                                 </div>
@@ -61,7 +61,7 @@
                         @endforeach                            
                     </div>
 
-                    <hr>
+                    <hr/>
 
                     {{-- Accommodate Count --}}
                     <div class="row">
@@ -74,7 +74,7 @@
                                         'name' => $count_name,
                                         'options' => $count_options,
                                         'selected' => old($count_name)
-                                    ])
+                                        ])
                                 </div>
                             </div>
                         @endforeach
@@ -87,8 +87,8 @@
                         @foreach ($amenities as $amenity_name => $amenity_value)
                             <div class="col-md-4">
                                 @include('partials.form.checkbox', [
-                                    'name' => $amenity_name,
-                                    'value' => old($amenity_name)
+                                    'name' => "amenities[{$amenity_name}]",
+                                    'value' => old("amenities.$amenity_name")
                                 ])
                                 <label for="{{ $amenity_name }}">{{ $amenity_value }}</label>
                             </div>
@@ -101,8 +101,13 @@
                         <button class="btn btn-form" type="submit">Search</button>
                     </div>
                 </div>
-                <br>
             </form>
+        
+            <br>
+
+            <div class="row">
+                @include('rooms.partials.room_list')
+            </div>
         </div>
         
         <div>
@@ -116,6 +121,17 @@
 <script>
     $(function() {
         $( "#slider" ).slider();
+
+        var open = false;
+
+        $('#filter').click(function() {
+            if (open) {
+                $('#filter').html("More filters <i class='fa fa-chevron-down'></i>")
+            } else {
+                $('#filter').html("More filters <i class='fa fa-chevron-up'></i>")
+            }
+            open = !open;
+        });
     });
 </script>
 <script>
