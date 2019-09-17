@@ -18071,6 +18071,10 @@ body {
   font-family: "Varela Round", "Helvetica Nue", sans-serif;
 }
 
+.navbar {
+  z-index: 1;
+}
+
 .navbar .navbar-brand {
   color: #ff5a5f;
 }
@@ -18239,6 +18243,27 @@ ul.sidebar li .fa {
 }
 
 .reviews form .btn-delete {
+  color: #00a699;
+}
+
+.search .filters {
+  padding: 10px 400px 10px 20px;
+  overflow: scroll;
+  height: 100%;
+}
+
+.search .map {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 100%;
+}
+
+.search .map .room-price {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
   color: #00a699;
 }
 

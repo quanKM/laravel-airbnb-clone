@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-9">
+<div class="container search">
+    <div class="row filters">
+        <div class="text-center">
             <form action="{{ route('search') }}" autocomplete="off">
                 <div class="mb-4 input-group-lg">
                     <input type="text" class="form-control" name="address" placeholder="Anywhere" value="{{ old('address') }}">
@@ -32,7 +32,6 @@
                             </div>
                         </div>
                     </div>
-    
                     <hr/>
 
                     <div class="row">
@@ -61,7 +60,7 @@
                         @endforeach                            
                     </div>
 
-                    <hr/>
+                    <hr>
 
                     {{-- Accommodate Count --}}
                     <div class="row">
@@ -83,7 +82,7 @@
                     <hr>
 
                     {{-- Amenities --}}
-                    <div class="row form-group mb-4">
+                    <div class="row form-group mb-4 text-left">
                         @foreach ($amenities as $amenity_name => $amenity_value)
                             <div class="col-md-4">
                                 @include('partials.form.checkbox', [
@@ -109,10 +108,10 @@
                 @include('rooms.partials.room_list')
             </div>
         </div>
-        
-        <div>
-    
-        </div>
+    </div>
+
+    <div class="map">
+        <div id="map" class="w-100 h-100"></div>
     </div>
 </div>
 @endsection
@@ -151,5 +150,34 @@
             $('#start_date').datepicker("option", "maxDate", selected);
         }
     });
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.api_key') }}"></script>
+<script>
+    function initialize(rooms) {
+        var location = {lat: 10.315699, lng: 123.88547};
+
+        if (rooms.length > 0) {
+            location = { lat: rooms[0].latitude, lng: rooms[0].longitude }
+        }
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: location,
+            zoom: 12
+        });
+
+        var marker, infowindow;
+
+        for (room of rooms) {
+            marker = new google.maps.Marker({
+                position: { lat: room.latitude, lng: room.longitude },
+                map: map
+            });
+            infowindow = new google.maps.InfoWindow({
+                content: "<div class='room-price'>$" + room.price + "</div>"
+            });
+            infowindow.open(map, marker);
+        }
+    }
+    google.maps.event.addDomListener(window, 'load', initialize(@json($rooms)));
 </script>
 @endsection

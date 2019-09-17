@@ -5,6 +5,8 @@ body {
 }
 
 .navbar {
+  z-index: 1;
+  
   .navbar-brand {
     color: $brand-color;
   }
