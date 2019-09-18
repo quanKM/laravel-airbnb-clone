@@ -6,7 +6,7 @@
         <div class="text-center">
             <form action="{{ route('search') }}" autocomplete="off">
                 <div class="mb-4 input-group-lg">
-                    <input type="text" class="form-control" name="address" placeholder="Anywhere" value="{{ old('address') }}">
+                    <input type="text" class="form-control" name="address" id="autoaddress" placeholder="Anywhere" value="{{ old('address') }}">
                 </div>
                 <div class="text-center">
                     <button type="button" id="filter" class="btn btn-default" data-toggle="collapse" data-target="#collapsePanel">More filters
@@ -151,7 +151,7 @@
         }
     });
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.api_key') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.api_key') }}&libraries=places"></script>
 <script>
     function initialize(rooms) {
         var location = {lat: 10.315699, lng: 123.88547};
@@ -197,6 +197,11 @@
         $('.ui-widget-header').css('background', '#00A699');
         $('.ui-state-default, .ui-widget-content').css('background', 'white');
         $('.ui-state-default, .ui-widget-content').css('border-color', '#00A699');
+    });
+</script>
+<script>
+    $(function() {
+        $('#autoaddress').geocomplete();
     });
 </script>
 @endsection

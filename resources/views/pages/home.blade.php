@@ -11,7 +11,7 @@
     <form action="{{ route('search') }}" autocomplete="off">
         <div class="row">
             <div class="col-md-6 input-group-lg">
-                <input class="form-control" name="address" type="text" placeholder="Where are you going?">
+                <input class="form-control" id="autoaddress" name="address" type="text" placeholder="Where are you going?">
             </div>
             <div class="col-md-3 input-group-lg">
                 <input class="form-control text-center" id="start_date" name="start_date" type="text" placeholder="Start Date">
@@ -69,6 +69,7 @@
 @endsection
 
 @section('scripts')
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.api_key') }}&libraries=places"></script>
 <script>
     $('#start_date').datepicker({
         dateFormat: 'yy-mm-dd',
@@ -85,6 +86,11 @@
         onSelect: function(selected) {
             $('#start_date').datepicker("option", "maxDate", selected);
         }
+    });
+</script>
+<script>
+    $(function() {
+        $('#autoaddress').geocomplete();
     });
 </script>
 @endsection
