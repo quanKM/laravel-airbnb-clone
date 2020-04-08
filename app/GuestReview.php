@@ -11,7 +11,7 @@ class GuestReview extends Review
     protected $attributes = [
         'type' => 'GuestReview',
     ];
-    
+
     public function guest()
     {
         return $this->belongsTo(User::class, 'guest_id');

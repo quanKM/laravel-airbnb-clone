@@ -19,9 +19,9 @@ class GuestReviewController extends Controller
     {
         // Check if current guest already reviewed the host in this reservation
         $hasReviewed = GuestReview::where('reservation_id', $reservation->id)
-                                 ->where('host_id', $reservation->room->user->id)
-                                 ->where('type', 'GuestReview')
-                                 ->first();
+                                ->where('host_id', $reservation->room->user->id)
+                                ->where('type', 'GuestReview')
+                                ->first();
 
         if (empty($hasReviewed)) {
             // Have not been reviewed, allow to be reviewed

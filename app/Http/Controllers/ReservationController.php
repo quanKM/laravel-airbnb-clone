@@ -11,12 +11,12 @@ class ReservationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
 
     public function store(Room $room, Request $request)
     {
-        if (Auth::user() == $room->user){
+        if (Auth::user() == $room->user) {
             toastr()->error('You cannot book your own property!');
         } else {
             $start_date = Carbon::createFromFormat('Y-m-d', $request->start_date);

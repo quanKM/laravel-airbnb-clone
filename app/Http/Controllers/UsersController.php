@@ -33,6 +33,7 @@ class UsersController extends Controller
     public function edit()
     {
         $user = auth()->user();
+
         return view('users.edit', compact('user'));
     }
 
@@ -51,6 +52,7 @@ class UsersController extends Controller
 
         if ($validator->fails()) {
             toastr()->error('There are error(s) in your submission');
+
             return back()->withErrors($validator)->withInput();
         }
 

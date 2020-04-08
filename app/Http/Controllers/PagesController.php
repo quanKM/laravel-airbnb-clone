@@ -11,16 +11,21 @@ class PagesController extends Controller
     protected $room_types = [
         'entire_room' => 'Entire',
         'private_room' => 'Private',
-        'shared_room' => 'Shared'
+        'shared_room' => 'Shared',
     ];
 
     protected $count_types = [
         'accommodate' => 'Accommodate',
         'bedroom_count' => 'Bedrooms',
-        'bathroom_count' => 'Bathrooms'
+        'bathroom_count' => 'Bathrooms',
     ];
 
-    protected $count_options = [1 => 1, 2 => 2, 3 => 3, 4 => '4+'];
+    protected $count_options = [
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => '4+',
+    ];
 
     protected $amenities = [
         'has_tv' => 'TV',
@@ -58,23 +63,22 @@ class PagesController extends Controller
                         ->withBathrooms($queries['bathroom_count'] ?? null)
                         ->withAmenities($queries['amenities'] ?? null)
                         ->get();
-        
+
             // Filter rooms (remove rooms with reservation on dates chosen)
             if ($request->has('start_date') && $request->has('end_date')) {
                 if (!is_null($queries['start_date']) && !is_null($queries['end_date'])) {
-
-                    foreach($rooms as $key => $room) {
+                    foreach ($rooms as $key => $room) {
                         $unavailable = $room->reservations()
-                                            ->where(function($query) use($queries) {
-                                                $query->where(function($query) use($queries) {
+                                            ->where(function ($query) use ($queries) {
+                                                $query->where(function ($query) use ($queries) {
                                                     $query->where('start_date', '>=', $queries['start_date'])
                                                         ->where('start_date', '<=', $queries['end_date']);
                                                 })
-                                                ->orWhere(function($query) use($queries) {
+                                                ->orWhere(function ($query) use ($queries) {
                                                     $query->where('end_date', '>=', $queries['start_date'])
                                                         ->where('end_date', '<=', $queries['end_date']);
                                                 })
-                                                ->orWhere(function($query) use($queries) {
+                                                ->orWhere(function ($query) use ($queries) {
                                                     $query->where('start_date', '<', $queries['start_date'])
                                                         ->where('end_date', '>', $queries['end_date']);
                                                 });
@@ -95,7 +99,7 @@ class PagesController extends Controller
             'count_types' => $this->count_types,
             'count_options' => $this->count_options,
             'amenities' => $this->amenities,
-            'rooms' => $rooms ?? []
+            'rooms' => $rooms ?? [],
         ]);
     }
 
@@ -103,8 +107,8 @@ class PagesController extends Controller
     {
         if (!is_null($input_room_types)) {
             return collect($this->room_types)->filter(
-                function($room_value, $room_name) use($input_room_types) {
-                    if (isset($input_room_types[$room_name]) && $input_room_types[$room_name] == "1") {
+                function ($room_value, $room_name) use ($input_room_types) {
+                    if (isset($input_room_types[$room_name]) && $input_room_types[$room_name] == '1') {
                         return $room_value;
                     }
                 }

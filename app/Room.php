@@ -31,7 +31,7 @@ class Room extends Model
 
     public function isReady()
     {
-    	return (
+        return (
             $this->price &&
             $this->listing_name &&
             $this->photos()->exists() &&
@@ -41,14 +41,14 @@ class Room extends Model
 
     public function coverPhoto($dimension)
     {
-        return $this->photos->count() > 0 ? Storage::disk('s3')->url($this->photos[0]->path($dimension)) : "/storage/photos/blank.jpg";
+        return $this->photos->count() > 0 ? Storage::disk('s3')->url($this->photos[0]->path($dimension)) : '/storage/photos/blank.jpg';
     }
 
     public function nearbys($radius)
     {
         $coordinates = [
             'lat' => $this->latitude,
-            'lng' => $this->longitude
+            'lng' => $this->longitude,
         ];
 
         return self::near($coordinates, $radius)->where('id', '!=', $this->id)->get();
@@ -70,7 +70,7 @@ class Room extends Model
         // 6371 => Earth's radius in km and 3959 => Earth's radius in miles
         $form = "( 6371 * acos( cos( radians({$coordinates['lat']}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$coordinates['lng']}) ) + sin( radians({$coordinates['lat']}) ) * sin( radians(latitude) ) ) )";
 
-        $query->when(!is_null($coordinates), function($q) use($form, $radius) {
+        $query->when(!is_null($coordinates), function ($q) use ($form, $radius) {
             return $q->select('*')
                      ->selectRaw("{$form} AS distance")
                      ->whereRaw("{$form} < ?", [$radius]);
@@ -78,44 +78,44 @@ class Room extends Model
     }
 
     public function scopeWithPriceBetween($query, $min_price, $max_price)
-    {        
-        $query->when(!is_null($min_price) && !is_null($max_price), function ($q) use($min_price, $max_price) {
+    {
+        $query->when(!is_null($min_price) && !is_null($max_price), function ($q) use ($min_price, $max_price) {
             return $q->whereBetween('price', [$min_price, $max_price]);
         });
     }
 
     public function scopeWithType($query, $room_types)
     {
-        $query->when(!is_null($room_types), function ($q) use($room_types) {
+        $query->when(!is_null($room_types), function ($q) use ($room_types) {
             return $q->whereIn('room_type', $room_types);
         });
     }
 
     public function scopeWithAccommodation($query, $accommodate)
     {
-        $query->when(!is_null($accommodate), function ($q) use($accommodate) {
+        $query->when(!is_null($accommodate), function ($q) use ($accommodate) {
             return $q->where('accommodate', $accommodate);
         });
     }
 
     public function scopeWithBedrooms($query, $bedroom_count)
     {
-        $query->when(!is_null($bedroom_count), function ($q) use($bedroom_count) {
+        $query->when(!is_null($bedroom_count), function ($q) use ($bedroom_count) {
             return $q->where('bedroom_count', $bedroom_count);
         });
     }
 
     public function scopeWithBathrooms($query, $bathroom_count)
     {
-        $query->when(!is_null($bathroom_count), function ($q) use($bathroom_count) {
+        $query->when(!is_null($bathroom_count), function ($q) use ($bathroom_count) {
             return $q->where('bathroom_count', $bathroom_count);
         });
     }
 
     public function scopeWithAmenities($query, $amenities)
     {
-        if (!is_null($amenities)){
-            foreach($amenities as $key => $value) {
+        if (!is_null($amenities)) {
+            foreach ($amenities as $key => $value) {
                 $query = $query->where($key, $value);
             }
 

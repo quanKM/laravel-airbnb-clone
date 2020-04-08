@@ -10,7 +10,7 @@ use Response;
 class PhotoController extends Controller
 {
     public function store(Request $request, Room $room)
-    {   
+    {
         if ($request->hasFile('photos')) {
             $files = $request->file('photos');
 
@@ -22,11 +22,13 @@ class PhotoController extends Controller
                 }
             }
         } else {
-            toastr()->error("No selected photos.");
+            toastr()->error('No selected photos.');
+
             return back();
         }
 
-        toastr()->success("Upload successful!");
+        toastr()->success('Upload successful!');
+
         return back();
     }
 
@@ -35,10 +37,10 @@ class PhotoController extends Controller
         if ($photo->delete()) {
             return Response::json([
                 'message' => 'Successfully deleted photo',
-                'empty_photos' => $room->photos()->count() > 0 ? false : true
+                'empty_photos' => $room->photos()->count() > 0 ? false : true,
             ]);
-        } else {
-            return Response::json(['message' => 'Something went wrong, try again.']);
         }
+
+        return Response::json(['message' => 'Something went wrong, try again.']);
     }
 }

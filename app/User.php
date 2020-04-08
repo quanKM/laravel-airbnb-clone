@@ -15,9 +15,8 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-
     protected $guarded = [
-        'email_verified_at', 'remember_token' 
+        'email_verified_at', 'remember_token',
     ];
 
     /**
@@ -46,6 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function gravatar($size = 150)
     {
         $hash = md5(strtolower(trim($this->attributes['email'])));
+
         return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
 

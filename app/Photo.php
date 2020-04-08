@@ -9,16 +9,18 @@ use Illuminate\Support\Facades\Storage;
 class Photo extends Model
 {
     protected $fillable = ['image'];
+
     protected $dimensions = [
         'original' => null,
         'medium' => 300,
-        'thumb' => 100
+        'thumb' => 100,
     ];
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
 
-        static::deleted(function($photo) {
+        static::deleted(function ($photo) {
             Storage::disk('s3')->deleteDirectory("photos/{$photo->id}");
         });
     }
@@ -28,7 +30,8 @@ class Photo extends Model
         return $this->belongsTo(Room::class);
     }
 
-    public function resizeAndSave($file) {
+    public function resizeAndSave($file)
+    {
         foreach ($this->dimensions as $dimension => $width) {
             $image = Image::make($file);
 

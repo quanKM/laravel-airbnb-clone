@@ -80,11 +80,11 @@ class RoomController extends Controller
         $room->fill($request->all());
 
         if ($request->has('address')) {
-            $coordinates =  Geocoder::getCoordinatesForAddress($request->address);
+            $coordinates = Geocoder::getCoordinatesForAddress($request->address);
 
             $room->fill([
                 'latitude' => $coordinates['lat'],
-                'longitude' => $coordinates['lng']
+                'longitude' => $coordinates['lng'],
             ]);
         }
 
@@ -158,9 +158,9 @@ class RoomController extends Controller
         $start_date = Carbon::createFromFormat('Y-m-d', $request->start_date);
         $end_date = Carbon::createFromFormat('Y-m-d', $request->end_date);
 
-        $output = array(
-            'conflict' => $this->isConflict($room, $start_date, $end_date)
-        );
+        $output = [
+            'conflict' => $this->isConflict($room, $start_date, $end_date),
+        ];
 
         return response()->json($output);
     }
@@ -169,6 +169,7 @@ class RoomController extends Controller
     {
         $check = $room->reservations->where('start_date', '>', $start_date)
                                     ->where('end_date', '<', $end_date);
+
         return $check->count() > 0 ? true :  false;
     }
 }

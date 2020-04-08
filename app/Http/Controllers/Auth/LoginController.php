@@ -49,7 +49,7 @@ class LoginController extends Controller
     public function sendFailedLoginResponse()
     {
         if ($this->emailNotFound()) {
-            $error = "Please try another email or Sign up for an account.";
+            $error = 'Please try another email or Sign up for an account.';
             $rules = [$this->username() => $error];
         }
 
