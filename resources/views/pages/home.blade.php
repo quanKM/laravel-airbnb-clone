@@ -4,37 +4,43 @@
 <div class="container">
     <div class="row">
         <div class="col-md-7 my-5">
-            <h1><span class="text-primary">Sunbnb</span> Book unique homes and experience a city like a local</h1>
+            <h1><span class="text-primary">Airbnb</span> Book unique homes and experience a city like a local</h1>
         </div>
     </div>
 
     <form action="{{ route('search') }}" autocomplete="off">
         <div class="row">
             <div class="col-md-6 input-group-lg">
-                <input class="form-control" id="autoaddress" name="address" type="text" placeholder="Where are you going?">
+                <input class="form-control" id="autoaddress" name="address" type="text"
+                    placeholder="Where are you going?">
             </div>
             <div class="col-md-3 input-group-lg">
-                <input class="form-control text-center" id="start_date" name="start_date" type="text" placeholder="Start Date">
+                <input class="form-control text-center" id="start_date" name="start_date" type="text"
+                    placeholder="Start Date">
             </div>
             <div class="col-md-3 input-group-lg">
-                <input class="form-control text-center" id="end_date" name="end_date" type="text" placeholder="End Date">
+                <input class="form-control text-center" id="end_date" name="end_date" type="text"
+                    placeholder="End Date">
             </div>
         </div>
 
-        <br/><br/>
+        <br /><br />
 
-         <div class="row">
+        <div class="row">
             <div class="offset-md-4 col-md-4">
                 <button type="submit" class="btn btn-normal btn-lg btn-block">Search</button>
             </div>
         </div>
     </form>
 
-    <br/><hr/><br/>
+    <br />
+    <hr /><br />
 
-    <div><h3>Homes</h3></div>
+    <div>
+        <h3>Homes</h3>
+    </div>
 
-    <br/>
+    <br />
 
     <div class="row">
         @include('rooms.partials.room_list')
@@ -42,7 +48,9 @@
 
     <br>
 
-    <div><h3>Cities</h3></div>
+    <div>
+        <h3>Cities</h3>
+    </div>
 
     <div class="row">
         <div class="col-md-3 col-sm-12">
@@ -66,12 +74,14 @@
             </a>
         </div>
     </div>
-@endsection
+    @endsection
 
-@section('scripts')
-<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.api_key') }}&libraries=places"></script>
-<script>
-    $('#start_date').datepicker({
+    @section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.api_key') }}&libraries=places">
+    </script>
+    <script>
+        $('#start_date').datepicker({
         dateFormat: 'yy-mm-dd',
         minDate: 0,
         maxDate: '3m',
@@ -87,10 +97,10 @@
             $('#start_date').datepicker("option", "maxDate", selected);
         }
     });
-</script>
-<script>
-    $(function() {
+    </script>
+    <script>
+        $(function() {
         $('#autoaddress').geocomplete();
     });
-</script>
-@endsection
+    </script>
+    @endsection
